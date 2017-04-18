@@ -1,3 +1,4 @@
+```
 oc new-project monitoring
 oc new-app docker.io/hawkular/hawkular-grafana-datasource
 oc expose svc hawkular-grafana-datasource
@@ -29,3 +30,4 @@ oc volume --add dc/alertmanager --name config-volume     -t configmap --configma
 oc volume --add dc/alertmanager --name templates-volume  -t configmap --configmap-name  alertmanager-templates -m /etc/alertmanager-templates --overwrite
 
 
+```
