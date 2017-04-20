@@ -3,6 +3,8 @@ oc new-project monitoring
 oc new-app docker.io/hawkular/hawkular-grafana-datasource
 oc expose svc hawkular-grafana-datasource
 oadm pod-network make-projects-global monitoring
+oadm policy add-cluster-role-to-user cluster-reader system:serviceaccount:monitoring:default
+
 
 oc create -f https://raw.githubusercontent.com/hawkular/hawkular-openshift-agent/master/deploy/openshift/hawkular-openshift-agent-configmap.yaml -n monitoring
 oc process -f https://raw.githubusercontent.com/hawkular/hawkular-openshift-agent/master/deploy/openshift/hawkular-openshift-agent.yaml | oc create -n monitoring -f -
@@ -15,8 +17,10 @@ oc annotate svc prometheus prometheus.io/scrape='true'
 
 oc create -f prometheus-config/prometheus-env.yaml
 oc create -f prometheus-config/prometheus-configmap.yaml
+oc create configmap prometheus-rules --from-file=prometheus-config/prometheus-rules
 oc volume --add dc/prometheus --name config-volume -t configmap --configmap-name  prometheus-configmap -m /etc/prometheus --overwrite
 oc volume --add dc/prometheus --name rules-volume  -t configmap --configmap-name  prometheus-rules     -m /etc/prometheus-rules --overwrite
+oc env dc prometheus  --from=configmap/prometheus-env
 
 
 
