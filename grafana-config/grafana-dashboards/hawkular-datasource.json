@@ -1,0 +1,7 @@
+{
+  "name": "hawkular",
+  "type": "hawkular",
+  "url": "https://hawkular-metrics.openshift-infra.svc.cluster.local",
+  "access": "proxy",
+  "basicAuth": false
+}

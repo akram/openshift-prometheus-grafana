@@ -29,7 +29,8 @@ oc volume --add dc/prometheus --name config-volume -t configmap --configmap-name
 oc volume --add dc/prometheus --name rules-volume  -t configmap --configmap-name  prometheus-rules     -m /etc/prometheus-rules --overwrite
 oc env dc prometheus  --from=configmap/prometheus-env
 
-
+oc create serviceaccount node-exporter
+oadm policy add-scc-to-user privileged system:serviceaccount:monitoring:node-exporter
 
 
 oc new-app prom/alertmanager
