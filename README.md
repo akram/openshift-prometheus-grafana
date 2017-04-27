@@ -10,7 +10,7 @@ oc create configmap grafana-config --from-file=grafana-config/grafana
 oc create configmap grafana-import-dashboards --from-file=grafana-config/grafana-dashboards/
 
 oc volume --add dc/hawkular-grafana-datasource --name config-volume     -t configmap --configmap-name  grafana-config -m /etc/grafana --overwrite
-oc volume --add dc/hawkular-grafana-datasource --name dashboards-volume -t configmap --configmap-name  grafana-import-dashboards  -m /var/lib/grafana/dashboards --overwrite
+# oc volume --add dc/hawkular-grafana-datasource --name dashboards-volume -t configmap --configmap-name  grafana-import-dashboards  -m /var/lib/grafana/dashboards --overwrite
 
 
 oc create -f https://raw.githubusercontent.com/hawkular/hawkular-openshift-agent/master/deploy/openshift/hawkular-openshift-agent-configmap.yaml -n monitoring
