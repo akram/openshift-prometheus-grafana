@@ -27,7 +27,7 @@ oadm policy add-scc-to-user privileged system:serviceaccount:monitoring:node-exp
 
 oc new-app prom/alertmanager
 oc annotate svc alertmanager prometheus.io/scrape='true'
-oc annotate svc alertmanager prometheus.io/path='/alertmanager/metrics'
+oc annotate svc alertmanager prometheus.io/path='/metrics'
 oc create configmap alertmanager-templates --from-file=alertmanager-config/alertmanager-templates
 oc create -f alertmanager-config/alertmanager-configmap.yaml
 oc volume --add dc/alertmanager --name config-volume     -t configmap --configmap-name  alertmanager-configmap -m /etc/alertmanager           --overwrite
