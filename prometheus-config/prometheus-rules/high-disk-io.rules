@@ -1,5 +1,5 @@
 ALERT HighDiskIO
-  IF (  avg( irate(node_disk_io_time_ms [1m]) ) by (device,instance) > 50
+  IF avg( irate(node_disk_io_time_ms [1m]) ) by (device,instance) > 50
   FOR 2m
   LABELS {
     severity="page"
