@@ -279,4 +279,11 @@ data:
         regex: 'kubernetes-(.*)'
         replacement: '${1}'
         target_label: name
-    
+
+    alerting:
+      alertmanagers:
+      - scheme: http
+        static_configs:
+        - targets:
+          - "alertmanager:9093"
+
