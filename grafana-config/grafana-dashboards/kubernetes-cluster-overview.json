@@ -1229,7 +1229,7 @@
           },
           "targets": [
             {
-              "expr": "sum(container_fs_limit_bytes{job=\"kubernetes-nodes\", kubernetes_io_hostname=~\"^$node$\"})",
+              "expr": "sum(container_fs_limit_bytes{job=\"kubernetes-nodes\", kubernetes_io_hostname=~\"^$node$\", id=\"/\"})",
               "interval": "10s",
               "intervalFactor": 1,
               "legendFormat": "",
