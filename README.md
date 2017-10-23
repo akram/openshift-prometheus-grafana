@@ -2,8 +2,8 @@
 oc new-project monitoring
 oc new-app docker.io/hawkular/hawkular-grafana-datasource
 oc expose svc hawkular-grafana-datasource
-oadm pod-network make-projects-global monitoring
-oadm policy add-cluster-role-to-user cluster-reader system:serviceaccount:monitoring:default
+oc adm pod-network make-projects-global monitoring
+oc adm policy add-cluster-role-to-user cluster-reader system:serviceaccount:monitoring:default
 
 oc create configmap grafana-config --from-file=grafana-config/grafana
 oc volume --add dc/hawkular-grafana-datasource --name config-volume     -t configmap --configmap-name  grafana-config -m /etc/grafana --overwrite
@@ -25,7 +25,7 @@ oc volume --add dc/prometheus --name rules-volume  -t configmap --configmap-name
 oc env dc prometheus  --from=configmap/prometheus-env
 
 oc create serviceaccount node-exporter
-oadm policy add-scc-to-user privileged system:serviceaccount:monitoring:node-exporter
+oc adm policy add-scc-to-user privileged system:serviceaccount:monitoring:node-exporter
 
 oc new-app prom/alertmanager
 oc annotate svc alertmanager prometheus.io/scrape='true'
