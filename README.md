@@ -1,3 +1,4 @@
+## INSTALL
 ```
 oc new-project monitoring
 oc new-app docker.io/hawkular/hawkular-grafana-datasource
