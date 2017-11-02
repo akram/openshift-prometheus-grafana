@@ -224,7 +224,7 @@ data:
         replacement: ${1}:${2}
         target_label: __address__
       - action: labelmap
-        regex: __meta_kubernetes_pod_label_(.+)
+        regex: __meta_kubernetes_pod_(.+)
       - source_labels: [__meta_kubernetes_pod_namespace]
         action: replace
         target_label: kubernetes_namespace
