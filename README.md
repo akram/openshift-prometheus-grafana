@@ -27,6 +27,7 @@ oc env dc prometheus  --from=configmap/prometheus-env
 
 oc create serviceaccount node-exporter
 oc adm policy add-scc-to-user privileged system:serviceaccount:monitoring:node-exporter
+oc create -f prometheus-node-exporter-daemonset.yaml
 
 oc new-app prom/alertmanager
 oc annotate svc alertmanager prometheus.io/scrape='true'
