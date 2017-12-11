@@ -15,8 +15,7 @@ oc adm policy add-cluster-role-to-user hawkular-openshift-agent system:serviceac
 
 oc new-app prom/prometheus
 oc annotate svc prometheus prometheus.io/scrape='true'
-oc patch dc prometheus -p '[{"op": "replace", "path": "/spec/template/spec/containers/0/args", "value":["-config.file=/etc/prometheus/prometheus.yml","-storage.local.path=/prometheus","-web.console.libraries=/usr/share/prometheus/console_libraries","-web.console.templates=/usr/share/prometheus/consoles" , "-alertmanager.url=http://alertmanager.monitoring.svc:9093" ] } ]' --type=json
-
+oc patch dc prometheus -p '[{"op": "replace", "path":"/spec/template/spec/containers/0/args","value":["--config.file=/etc/prometheus/prometheus.yml","--storage.tsdb.path=/prometheus","--web.console.libraries=/usr/share/prometheus/console_libraries","--web.console.templates=/usr/share/prometheus/consoles" ] } ]' --type=json
 
 oc create -f prometheus-config/prometheus-env.yaml
 oc create -f prometheus-config/prometheus-configmap.yaml
